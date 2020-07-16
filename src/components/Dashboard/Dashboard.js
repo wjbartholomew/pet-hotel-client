@@ -7,11 +7,12 @@ class Dashboard extends Component {
     color: "",
     breed: "",
     owner: "",
+    owner_id: "",
   };
 
-  componentDidMount() {
-    this.getPets();
-  }
+  //   componentDidMount() {
+  //     this.getPets();
+  //   }
 
   getPets = () => {
     this.props.dispatch({
@@ -22,8 +23,10 @@ class Dashboard extends Component {
   trackPet = (event, type) => {
     this.setState({
       ...this.state,
-      [type]: event.target.value,
+      owner_id: event.target.value,
+      //   [type]: event.target.value,
     });
+    console.log(this.state);
   };
 
   goToManageOwners = () => {
@@ -62,10 +65,11 @@ class Dashboard extends Component {
           ></input>
           <select
             placeholder="Owner Name"
+            // onChange={(event) => this.handleOwnerSelect(event)}
             onChange={(event) => this.trackPet(event, "owner")}
           >
             {this.props.reduxState.owners.map((owner) => {
-              return <option>{owner.firstName}</option>;
+              return <option value={owner.key}>{owner.firstName}</option>;
             })}
             <option></option>
           </select>
