@@ -12,9 +12,9 @@ class ManageOwners extends Component {
     }
 
     getOwners = () => {
-        // this.props.dispatch({
-        //     type: 'GET_OWNERS'
-        // })
+        this.props.dispatch({
+            type: 'GET_OWNERS'
+        })
     }
 
     trackName = (event) => {
@@ -53,23 +53,27 @@ class ManageOwners extends Component {
                 <h2>Owners</h2>
                 <div>
                     <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Number of Pets</th>
-                            <th>Actions</th>
-                            <th>Color</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Number of Pets</th>
+                                <th>Actions</th>
+                                <th>Color</th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
 
-                        {/*this.props.reduxState.owners.map(item) =>
-                        <tr>
+                        {this.props.reduxState.owners.map(item => {
+                        return <tr>
                             <td>{item.name}</td>
                             <td>{item.numberOfPets}</td>
-                            <td>{item.Actions}</td>
-                            <td>{item.Color}</td>
-                        </tr> */}
+                            <td><button value={item.id} onClick={(event) => this.deleteOwner(event)}>Delete</button></td>
+                        </tr>
+                        })
+                        }
 
-
+                        </tbody>
                     </table>
                 </div>
 
@@ -79,8 +83,8 @@ class ManageOwners extends Component {
 }
 
 
-// const mapStateToProps = state => ({
-//     state
-// });
+const mapStateToProps = reduxState => ({
+    reduxState
+});
 
-export default ManageOwners;
+export default connect(mapStateToProps)(ManageOwners);
