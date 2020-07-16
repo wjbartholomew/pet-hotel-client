@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 class ManageOwners extends Component {
 
     state = {
-        owner: ''
+        firstName: '',
+        lastName: ''
     }
 
     componentDidMount(){
@@ -17,9 +18,15 @@ class ManageOwners extends Component {
         })
     }
 
-    trackName = (event) => {
+    trackFirstName = (event) => {
         this.setState({
-            owner: event.target.value
+            firstName: event.target.value
+        })
+    }
+
+    trackLastName = (event) => {
+        this.setState({
+            lastName: event.target.value
         })
     }
 
@@ -41,13 +48,15 @@ class ManageOwners extends Component {
         return (
             <div>
                 <h1>Pet Hotel</h1>
+                {console.log(this.state)}
                 <div>
                     <p onClick={this.goToDashboard}>Dashboard</p>
                     <h3>Manage Owners</h3>
                 </div>
                 <h2>Add Owner</h2>
                 <div>
-                    <input onChange={(event)=>this.trackName(event)}placeholder="Owner Name"></input>
+                    <input onChange={(event)=>this.trackFirstName(event)} placeholder="First Name"></input>
+                    <input onChange={(event) => this.trackLastName(event)} placeholder="Last Name"></input>
                     <button onClick={this.submitOwner}>Submit</button>
                 </div>
                 <h2>Owners</h2>
@@ -58,7 +67,6 @@ class ManageOwners extends Component {
                                 <th>Name</th>
                                 <th>Number of Pets</th>
                                 <th>Actions</th>
-                                <th>Color</th>
                             </tr>
                         </thead>
 
@@ -66,7 +74,7 @@ class ManageOwners extends Component {
 
                         {this.props.reduxState.owners.map(item => {
                         return <tr>
-                            <td>{item.name}</td>
+                            <td>{item.firstName}</td>
                             <td>{item.numberOfPets}</td>
                             <td><button value={item.id} onClick={(event) => this.deleteOwner(event)}>Delete</button></td>
                         </tr>
