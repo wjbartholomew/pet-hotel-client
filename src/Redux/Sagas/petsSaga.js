@@ -15,7 +15,7 @@ function* getPets(action) {
 function* submitPet(action) {
     console.log('submitPet action.payload:', action.payload)
     try {
-        yield axios.post(`/pets`, action.payload)
+        yield axios.post(`http://147.0.0.1:5000/pet`, action.payload)
         yield put({ type: 'GET_PETS' })
     } catch (error) {
         console.log('SAVE PET FAILED', error)
