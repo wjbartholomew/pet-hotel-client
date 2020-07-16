@@ -5,7 +5,7 @@ import axios from 'axios';
 function* getPets(action) {
     console.log('in submitPet saga', action.payload)
     try {
-        const pets = yield axios.get(`/pets`)
+        const pets = yield axios.get(`http://127.0.0.1/pet`)
         yield put({ type: 'SET_PETS', payload: pets.data })
     } catch (error) {
         console.log('GET FAILED', error)
@@ -15,7 +15,7 @@ function* getPets(action) {
 function* submitPet(action) {
     console.log('submitPet action.payload:', action.payload)
     try {
-        yield axios.post(`http://147.0.0.1:5000/pet`, action.payload)
+        yield axios.post(`http://127.0.0.1:5000/pet`, action.payload)
         yield put({ type: 'GET_PETS' })
     } catch (error) {
         console.log('SAVE PET FAILED', error)
