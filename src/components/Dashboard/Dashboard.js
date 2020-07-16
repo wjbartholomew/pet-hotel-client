@@ -15,9 +15,9 @@ class Dashboard extends Component {
     }
 
     getPets = () => {
-        // this.props.dispatch({
-        //     type: 'GET_PETS'
-        // })
+        this.props.dispatch({
+            type: 'GET_PETS'
+        })
     }
 
     trackPet = (event, type) => {
@@ -28,7 +28,6 @@ class Dashboard extends Component {
     }
 
     goToManageOwners = () => {
-        console.log('in ')
         this.props.history.push('/ManageOwners')
     }
 
@@ -57,7 +56,7 @@ class Dashboard extends Component {
                     <input placeholder="Pet Breed" onChange={(event) => this.trackPet(event, 'breed')}></input>
                     <select placeholder="Owner Name" onChange={(event) => this.trackPet(event, 'owner')}>
                         <option>
-                           
+                           Owner Name
                         </option>
                     </select>
                     <button onClick={this.submitPet}>Submit</button>
@@ -67,24 +66,37 @@ class Dashboard extends Component {
 
               <div>
                     <table>
-                        <tr>
-                            <th>Owner</th>
-                            <th>Pet</th>
-                            <th>Breed</th>
-                            <th>Color</th>
-                            <th>Checked In</th>
-                            <th>Actions</th>
-                        </tr>
-
-                        {/* this.props.reduxState.pets.map(item) =>
-                        <tr>
+                        <thead>
+                            <tr>
+                                <th>Owner</th>
+                                <th>Pet</th>
+                                <th>Breed</th>
+                                <th>Color</th>
+                                <th>Checked In</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {this.props.reduxState.pets.map((item) => {
+                            return <tr>
                             <td>{item.owner}</td>
                             <td>{item.pet}</td>
                             <td>{item.breed}</td>
-                            <td>{item.Color}</td>
-                            <td>{item.Checked}</td>
-                            <td>{item=.Actions}</td>
-                        </tr> */}
+                            <td>{item.color}</td>
+                            <td>{item.checked}</td>
+
+                            { item.checked === true?
+                            <td><button value={item.id} onClick={(event) => this.deletePet(event)}>Delete</button>/
+                            <button value={item.id} onClick={(event) => this.checkOut(event)}>Check Out</button></td>
+                            :
+                                <td><button value={item.id} onClick={(event) => this.deletePet(event)}>Delete</button>/
+                            <button value={item.id} onClick={(event) => this.checkIn(event)}>Check In</button></td>
+                            }
+                        </tr>
+                        })
+                        }
+
+                        </tbody>
 
                     </table>
 
@@ -95,8 +107,8 @@ class Dashboard extends Component {
 }
 
 
-// const mapStateToProps = reduxState => ({
-//     reduxState
-// });
+const mapStateToProps = reduxState => ({
+    reduxState
+});
 
-export default Dashboard;
+export default connect(mapStateToProps)(Dashboard);
