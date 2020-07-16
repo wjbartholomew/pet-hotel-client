@@ -12,9 +12,9 @@ class ManageOwners extends Component {
     }
 
     getOwners = () => {
-        // this.props.dispatch({
-        //     type: 'GET_OWNERS'
-        // })
+        this.props.dispatch({
+            type: 'GET_OWNERS'
+        })
     }
 
     trackName = (event) => {
@@ -79,8 +79,8 @@ class ManageOwners extends Component {
 }
 
 
-// const mapStateToProps = state => ({
-//     state
-// });
+const mapStateToProps = state => ({
+    state
+});
 
-export default ManageOwners;
+export default connect(mapStateToProps)(ManageOwners);
