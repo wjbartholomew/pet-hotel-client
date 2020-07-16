@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 class ManageOwners extends Component {
 
+    state = {
+        owner: ''
+    }
+
     componentDidMount(){
         this.getOwners()
     }
@@ -11,6 +15,19 @@ class ManageOwners extends Component {
         // this.props.dispatch({
         //     type: 'GET_OWNERS'
         // })
+    }
+
+    trackName = (event) => {
+        this.setState({
+            owner: event.target.value
+        })
+    }
+
+    submitOwner= () => {
+        this.props.dispatch({
+            type:'SUBMIT_OWNER',
+            payload: this.state
+        })
     }
 
 
@@ -28,9 +45,9 @@ class ManageOwners extends Component {
                     <p onClick={this.goToDashboard}>Dashboard</p>
                     <h3>Manage Owners</h3>
                 </div>
-                <h2>Add Pet</h2>
+                <h2>Add Owner</h2>
                 <div>
-                    <input placeholder="Owner Name"></input>
+                    <input onChange={(event)=>this.trackName(event)}placeholder="Owner Name"></input>
                     <button onClick={this.submitOwner}>Submit</button>
                 </div>
                 <h2>Owners</h2>
@@ -44,7 +61,7 @@ class ManageOwners extends Component {
                         </tr>
 
 
-                        {/* map =>
+                        {/*this.props.reduxState.owners.map(item) =>
                         <tr>
                             <td>{item.name}</td>
                             <td>{item.numberOfPets}</td>

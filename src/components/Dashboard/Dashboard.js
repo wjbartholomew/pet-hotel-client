@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 
 class Dashboard extends Component {
 
+    state = {
+        name: '',
+        color: '',
+        breed: '',
+        owner: '',
+    }
 
     componentDidMount(){
         this.getPets();
@@ -14,9 +20,23 @@ class Dashboard extends Component {
         // })
     }
 
+    trackPet = (event, type) => {
+        this.setState({
+            ...this.state,
+            [type]: event.target.value
+        })
+    }
+
     goToManageOwners = () => {
         console.log('in ')
         this.props.history.push('/ManageOwners')
+    }
+
+    submitPet = () => {
+        this.props.dispatch({
+            type: 'SUBMIT_PET',
+            payload: this.state
+        })
     }
 
 
@@ -30,21 +50,22 @@ class Dashboard extends Component {
                     <p onClick={this.goToManageOwners}>Manage Owners</p>
                 </div>
                 <h2>Add Pet</h2>
+
                 <div>
-                    <input placeholder="Pet Name"></input>
-                    <input placeholder="Pet Color"></input>
-                    <input placeholder="Pet Breed"></input>
-                    <select placeholder="Owner Name">
+                    <input placeholder="Pet Name" onChange={(event)=>this.trackPet(event, 'name')}></input>
+                    <input placeholder="Pet Color" onChange={(event) => this.trackPet(event, 'color')}></input>
+                    <input placeholder="Pet Breed" onChange={(event) => this.trackPet(event, 'breed')}></input>
+                    <select placeholder="Owner Name" onChange={(event) => this.trackPet(event, 'owner')}>
                         <option>
-                            Owner Name
+                           
                         </option>
                     </select>
                     <button onClick={this.submitPet}>Submit</button>
                 </div>
+
                 <h2>History</h2>
+
               <div>
-
-
                     <table>
                         <tr>
                             <th>Owner</th>
@@ -55,7 +76,7 @@ class Dashboard extends Component {
                             <th>Actions</th>
                         </tr>
 
-                        {/* map =>
+                        {/* this.props.reduxState.pets.map(item) =>
                         <tr>
                             <td>{item.owner}</td>
                             <td>{item.pet}</td>
@@ -65,18 +86,17 @@ class Dashboard extends Component {
                             <td>{item=.Actions}</td>
                         </tr> */}
 
-
                     </table>
-              </div>
 
+              </div>
             </div>
         );
     }
 }
 
 
-// const mapStateToProps = state => ({
-//     state
+// const mapStateToProps = reduxState => ({
+//     reduxState
 // });
 
 export default Dashboard;
