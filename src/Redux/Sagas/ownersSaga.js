@@ -16,7 +16,7 @@ function* submitOwner(action) {
     console.log('save owners to database')
     console.log('action.payload:', action.payload)
     try {
-        yield axios.post(`http://127.0.0.1:5000/owners`, action.payload)
+        yield axios.post(`http://127.0.0.1:5000/owner`, action.payload)
         yield put({ type: 'GET_OWNERS' })
     } catch (error) {
         console.log('OWNER POST FAILED', error)
