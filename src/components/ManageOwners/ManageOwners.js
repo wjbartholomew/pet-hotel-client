@@ -83,6 +83,7 @@ class ManageOwners extends Component {
 }
 
 
+
 const mapStateToProps = reduxState => ({
     reduxState
 });
