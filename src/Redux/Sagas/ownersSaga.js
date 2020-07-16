@@ -5,8 +5,8 @@ import axios from 'axios';
 function* getOwners(action) {
     console.log('in getOwners saga', action.payload)
     try {
-        const owners = yield axios.get(`/owners`)
-        yield put({ type: 'SET_OWNERS', payload: owners.data })
+        const owners = yield axios.get(`http://127.0.0.1:5000/owners`)
+        yield put({ type: 'SET_OWNERS', payload: owners })
     } catch (error) {
         console.log('GET FAILED', error)
     }
