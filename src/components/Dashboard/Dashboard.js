@@ -66,6 +66,7 @@ class Dashboard extends Component {
             // onChange={(event) => this.handleOwnerSelect(event)}
             onChange={(event) => this.trackPet(event, "owner")}
           >
+              <option value='Owner Not Chosen' selected>Pick an Owner!</option>
             {this.props.reduxState.owners.map((owner) => {
               return <option value={owner.key}>{owner.firstName}</option>;
             })}
@@ -94,8 +95,12 @@ class Dashboard extends Component {
                     <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
+<<<<<<< HEAD
                     <td>String({item.is_checked_into})</td>
 
+=======
+                    <td>{String(item.is_checked_in)}</td>
+>>>>>>> 6a79fe60c6b94fc57459ea84177a0a63fed7483d
                     {item.checked === true ? (
                       <td>
                         <button
