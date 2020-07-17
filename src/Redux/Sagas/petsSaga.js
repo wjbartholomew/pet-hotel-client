@@ -32,9 +32,10 @@ function* deletePet(action) {
 }
 
 function* checkIn(action) {
-  console.log("In checkIn Saga");
+  console.log("In checkIn Saga", action.payload);
+  const petId = {key: action.payload}
   try {
-    yield axios.put(`/pets/${action.payload}`);
+    yield axios.put(`http://127.0.0.1:5000/pet`, petId);
     yield put({ type: "GET_PETS" });
   } catch (error) {
     console.log("CHECK IN PET FAILED:", error);
@@ -55,7 +56,7 @@ function* petsSaga() {
   yield takeLatest("SUBMIT_PET", submitPet);
   yield takeLatest("GET_PETS", getPets);
   yield takeLatest("DELETE_PET", deletePet);
-  yield takeLatest("CHECK_IN", checkIn);
+  yield takeLatest("CHECK_PET_IN", checkIn);
   yield takeLatest("CHECK_OUT", checkOut);
 }
 

@@ -7,15 +7,23 @@ class Dashboard extends Component {
     color: "",
     breed: "",
     owner: "",
+    is_checked_in: false,
   };
 
   componentDidMount() {
     this.getPets();
+    this.getOwners();
   }
 
   getPets = () => {
     this.props.dispatch({
       type: "GET_PETS",
+    });
+  };
+
+  getOwners = () => {
+    this.props.dispatch({
+      type: "GET_OWNERS",
     });
   };
 
@@ -36,6 +44,16 @@ class Dashboard extends Component {
       type: "SUBMIT_PET",
       payload: this.state,
     });
+  };
+
+  deletePet = () => {};
+
+  checkIn = (id) => {
+    this.props.dispatch({
+      type: "CHECK_PET_IN",
+      payload: id,
+    });
+    console.log(id);
   };
 
   render() {
@@ -66,7 +84,9 @@ class Dashboard extends Component {
             // onChange={(event) => this.handleOwnerSelect(event)}
             onChange={(event) => this.trackPet(event, "owner")}
           >
-              <option value='Owner Not Chosen' selected>Pick an Owner!</option>
+            <option value="Owner Not Chosen" selected>
+              Pick an Owner!
+            </option>
             {this.props.reduxState.owners.map((owner) => {
               return <option value={owner.key}>{owner.firstName}</option>;
             })}
@@ -91,17 +111,18 @@ class Dashboard extends Component {
               {this.props.reduxState.pets.map((item) => {
                 return (
                   <tr>
-                    <td>{item.owner}</td>
+                    <td>
+                      {this.props.reduxState.owners.map((owner) => {
+                        if (item.owners_id === owner.key) {
+                          return owner.firstName;
+                        }
+                      })}
+                    </td>
                     <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
-<<<<<<< HEAD
-                    <td>String({item.is_checked_into})</td>
-
-=======
-                    <td>{String(item.is_checked_in)}</td>
->>>>>>> 6a79fe60c6b94fc57459ea84177a0a63fed7483d
-                    {item.checked === true ? (
+                    {item.is_checked_in === true ? <td>Yes</td> : <td>No</td>}
+                    {item.is_checked_in === true ? (
                       <td>
                         <button
                           value={item.id}
@@ -112,7 +133,7 @@ class Dashboard extends Component {
                         /
                         <button
                           value={item.id}
-                          onClick={(event) => this.checkOut(event)}
+                          onClick={() => this.checkIn(item.id)}
                         >
                           Check Out
                         </button>
@@ -121,14 +142,14 @@ class Dashboard extends Component {
                       <td>
                         <button
                           value={item.id}
-                          onClick={(event) => this.deletePet(event)}
+                          onClick={() => this.deletePet()}
                         >
                           Delete
                         </button>
                         /
                         <button
                           value={item.id}
-                          onClick={(event) => this.checkIn(event)}
+                          onClick={() => this.checkIn(item.id)}
                         >
                           Check In
                         </button>
