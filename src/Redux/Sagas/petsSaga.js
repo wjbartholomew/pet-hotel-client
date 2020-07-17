@@ -6,7 +6,7 @@ function* getPets(action) {
     console.log('in submitPet saga', action.payload)
     try {
         const pets = yield axios.get(`http://127.0.0.1/pet`)
-        yield put({ type: 'SET_PETS', payload: pets.data })
+        yield put({ type: 'SET_PETS', payload: pets })
     } catch (error) {
         console.log('GET FAILED', error)
     }
