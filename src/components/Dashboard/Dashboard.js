@@ -2,18 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {
-  
   state = {
     name: "",
     color: "",
     breed: "",
     owner: "",
-    owner_id: "",
   };
 
-  //   componentDidMount() {
-  //     this.getPets();
-  //   }
+  componentDidMount() {
+    this.getPets();
+  }
 
   getPets = () => {
     this.props.dispatch({
@@ -24,8 +22,7 @@ class Dashboard extends Component {
   trackPet = (event, type) => {
     this.setState({
       ...this.state,
-      owner_id: event.target.value,
-      //   [type]: event.target.value,
+      [type]: event.target.value,
     });
     console.log(this.state);
   };
@@ -72,13 +69,11 @@ class Dashboard extends Component {
             {this.props.reduxState.owners.map((owner) => {
               return <option value={owner.key}>{owner.firstName}</option>;
             })}
-            <option></option>
           </select>
           <button onClick={this.submitPet}>Submit</button>
         </div>
 
         <h2>History</h2>
-
         <div>
           <table>
             <thead>
@@ -96,10 +91,10 @@ class Dashboard extends Component {
                 return (
                   <tr>
                     <td>{item.owner}</td>
-                    <td>{item.pet}</td>
+                    <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
-                    <td>{item.checked}</td>
+                    <td>{item.is_checked_in}</td>
 
                     {item.checked === true ? (
                       <td>
