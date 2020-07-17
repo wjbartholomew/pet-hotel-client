@@ -4,7 +4,7 @@ import axios from "axios";
 function* getPets(action) {
   console.log("in submitPet saga", action.payload);
   try {
-    const pets = yield axios.get(`http://127.0.0.1/pet`);
+    const pets = yield axios.get(`http://127.0.0.1:5000/pet`);
     yield put({ type: "SET_PETS", payload: pets.data });
   } catch (error) {
     console.log("GET FAILED", error);

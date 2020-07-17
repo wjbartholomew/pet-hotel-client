@@ -7,12 +7,11 @@ class Dashboard extends Component {
     color: "",
     breed: "",
     owner: "",
-    owner_id: "",
   };
 
-    componentDidMount() {
-      this.getPets();
-    }
+  componentDidMount() {
+    this.getPets();
+  }
 
   getPets = () => {
     this.props.dispatch({
@@ -23,7 +22,7 @@ class Dashboard extends Component {
   trackPet = (event, type) => {
     this.setState({
       ...this.state,
-      owner_id: event.target.value,
+      [type]: event.target.value,
     });
     console.log(this.state);
   };
