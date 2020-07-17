@@ -94,7 +94,7 @@ class Dashboard extends Component {
                     <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
-                    <td>{item.is_checked_in}</td>
+                    <td>String({item.is_checked_into})</td>
 
                     {item.checked === true ? (
                       <td>
