@@ -11,6 +11,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getPets();
+    this.getOwners();
   }
 
   getPets = () => {
@@ -18,6 +19,12 @@ class Dashboard extends Component {
       type: "GET_PETS",
     });
   };
+
+    getOwners = () => {
+        this.props.dispatch({
+            type: "GET_OWNERS",
+        });
+    };
 
   trackPet = (event, type) => {
     this.setState({
