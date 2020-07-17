@@ -10,9 +10,9 @@ class Dashboard extends Component {
     owner_id: "",
   };
 
-  //   componentDidMount() {
-  //     this.getPets();
-  //   }
+    componentDidMount() {
+      this.getPets();
+    }
 
   getPets = () => {
     this.props.dispatch({
@@ -24,7 +24,6 @@ class Dashboard extends Component {
     this.setState({
       ...this.state,
       owner_id: event.target.value,
-      //   [type]: event.target.value,
     });
     console.log(this.state);
   };
@@ -71,7 +70,6 @@ class Dashboard extends Component {
             {this.props.reduxState.owners.map((owner) => {
               return <option value={owner.key}>{owner.firstName}</option>;
             })}
-            <option></option>
           </select>
           <button onClick={this.submitPet}>Submit</button>
         </div>
