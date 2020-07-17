@@ -7,6 +7,7 @@ class Dashboard extends Component {
     color: "",
     breed: "",
     owner: "",
+    is_checked_in: false,
   };
 
   componentDidMount() {
@@ -38,6 +39,16 @@ class Dashboard extends Component {
     });
   };
 
+  deletePet = () => {};
+
+  checkIn = (id) => {
+    this.props.dispatch({
+      type: "CHECK_PET_IN",
+      payload: id,
+    });
+    console.log(id);
+  };
+
   render() {
     return (
       <div>
@@ -66,7 +77,9 @@ class Dashboard extends Component {
             // onChange={(event) => this.handleOwnerSelect(event)}
             onChange={(event) => this.trackPet(event, "owner")}
           >
-              <option value='Owner Not Chosen' selected>Pick an Owner!</option>
+            <option value="Owner Not Chosen" selected>
+              Pick an Owner!
+            </option>
             {this.props.reduxState.owners.map((owner) => {
               return <option value={owner.key}>{owner.firstName}</option>;
             })}
@@ -95,7 +108,7 @@ class Dashboard extends Component {
                     <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
-                    <td>{String(item.is_checked_in)}</td>
+                    <td>{String(item.is_checked_in).toUpperCase()}</td>
                     {item.checked === true ? (
                       <td>
                         <button
@@ -107,7 +120,7 @@ class Dashboard extends Component {
                         /
                         <button
                           value={item.id}
-                          onClick={(event) => this.checkOut(event)}
+                          onClick={() => this.checkIn(item.id)}
                         >
                           Check Out
                         </button>
@@ -116,14 +129,14 @@ class Dashboard extends Component {
                       <td>
                         <button
                           value={item.id}
-                          onClick={(event) => this.deletePet(event)}
+                          onClick={() => this.deletePet()}
                         >
                           Delete
                         </button>
                         /
                         <button
                           value={item.id}
-                          onClick={(event) => this.checkIn(event)}
+                          onClick={() => this.checkIn(item.id)}
                         >
                           Check In
                         </button>
