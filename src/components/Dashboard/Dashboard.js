@@ -77,7 +77,7 @@ class Dashboard extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {this.props.reduxState.pets.map((item) => {
+                        {/* {this.props.reduxState.pets.map((item) => {
                             return <tr>
                             <td>{item.owner}</td>
                             <td>{item.pet}</td>
@@ -94,7 +94,7 @@ class Dashboard extends Component {
                             }
                         </tr>
                         })
-                        }
+                        } */}
 
                         </tbody>
 

@@ -1,7 +1,16 @@
 const pets = (state = [], action) => {
     switch (action.type) {
         case 'SET_PETS':
-            return action.payload;
+            let pets = action.payload.data;
+            const petObjects = pets.map(([id, name, breed, color, is_checked_in, owners_id]) => ({
+                id,
+                name,
+                breed,
+                color,
+                is_checked_in,
+                owners_id
+            }))
+            return petObjects;
         default:
             return state;
     }
