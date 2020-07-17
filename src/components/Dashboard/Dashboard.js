@@ -74,7 +74,6 @@ class Dashboard extends Component {
         </div>
 
         <h2>History</h2>
-
         <div>
           <table>
             <thead>
@@ -92,10 +91,10 @@ class Dashboard extends Component {
                 return (
                   <tr>
                     <td>{item.owner}</td>
-                    <td>{item.pet}</td>
+                    <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
-                    <td>{item.checked}</td>
+                    <td>{item.is_checked_in}</td>
 
                     {item.checked === true ? (
                       <td>
