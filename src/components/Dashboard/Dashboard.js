@@ -21,11 +21,11 @@ class Dashboard extends Component {
     });
   };
 
-    getOwners = () => {
-        this.props.dispatch({
-            type: "GET_OWNERS",
-        });
-    };
+  getOwners = () => {
+    this.props.dispatch({
+      type: "GET_OWNERS",
+    });
+  };
 
   trackPet = (event, type) => {
     this.setState({
@@ -111,20 +111,18 @@ class Dashboard extends Component {
               {this.props.reduxState.pets.map((item) => {
                 return (
                   <tr>
-                      
                     <td>
-                        {this.props.reduxState.owners.map((owner) => {
-                            if (item.owners_id === owner.key) {
-                                return owner.firstName
-                            }
-                        })
+                      {this.props.reduxState.owners.map((owner) => {
+                        if (item.owners_id === owner.key) {
+                          return owner.firstName;
                         }
+                      })}
                     </td>
                     <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
-                    <td>{String(item.is_checked_in).toUpperCase()}</td>
-                    {item.checked === true ? (
+                    {item.is_checked_in === true ? <td>Yes</td> : <td>No</td>}
+                    {item.is_checked_in === true ? (
                       <td>
                         <button
                           value={item.id}
