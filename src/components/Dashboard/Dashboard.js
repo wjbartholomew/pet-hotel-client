@@ -66,6 +66,7 @@ class Dashboard extends Component {
             // onChange={(event) => this.handleOwnerSelect(event)}
             onChange={(event) => this.trackPet(event, "owner")}
           >
+              <option value='Owner Not Chosen' selected>Pick an Owner!</option>
             {this.props.reduxState.owners.map((owner) => {
               return <option value={owner.key}>{owner.firstName}</option>;
             })}
