@@ -12,6 +12,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getPets();
+    this.getOwners();
   }
 
   getPets = () => {
@@ -19,6 +20,12 @@ class Dashboard extends Component {
       type: "GET_PETS",
     });
   };
+
+    getOwners = () => {
+        this.props.dispatch({
+            type: "GET_OWNERS",
+        });
+    };
 
   trackPet = (event, type) => {
     this.setState({
@@ -104,7 +111,15 @@ class Dashboard extends Component {
               {this.props.reduxState.pets.map((item) => {
                 return (
                   <tr>
-                    <td>{item.owner}</td>
+                      
+                    <td>
+                        {this.props.reduxState.owners.map((owner) => {
+                            if (item.owners_id === owner.key) {
+                                return owner.firstName
+                            }
+                        })
+                        }
+                    </td>
                     <td>{item.name}</td>
                     <td>{item.breed}</td>
                     <td>{item.color}</td>
